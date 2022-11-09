@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Album } from "./Album.js";
+import { AddNewAlbum } from "./AddNewAlbum.js";
+
+import { useState } from "react";
+import { albums } from "./data.js";
 
 function App() {
+  const [newAlbum, setNewAlbum] = useState({});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Albums</h1>
+      <AddNewAlbum
+        albums={albums}
+        newAlbum={newAlbum}
+        setNewAlbum={setNewAlbum}
+      />
+      <div className="container">
+        {albums.map((album, index) => {
+          console.log(album.name);
+          return (
+            <Album
+              key={index}
+              name={album.name}
+              artist={album.artist}
+              released={album.released}
+              cover={album.cover}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
